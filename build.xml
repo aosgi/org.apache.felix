@@ -20,24 +20,45 @@
         <javac
             srcdir="${basedir}/../org.apache.felix.main/src/main/java"
             destdir="${out.dir}/classes"
-            classpath="${out.dir}/classes"
-            verbose="true" />
+            classpath="${out.dir}/classes" />
+        <copy todir="${out.dir}/classes">
+            <fileset dir="${basedir}/../org.apache.felix.main/src/main/resources">
+                <include name="**/*" />
+            </fileset>
+            <fileset dir="${basedir}/../org.apache.felix.main/src/main/appended-resources">
+                <include name="**/*" />
+            </fileset>
+        </copy>
     </target>
 
     <target name="org.apache.felix.framework" depends="org.apache.felix.resolver">
         <javac
             srcdir="${basedir}/../org.apache.felix.framework/src/main/java"
             destdir="${out.dir}/classes"
-            classpath="${out.dir}/classes"
-            verbose="true" />
+            classpath="${out.dir}/classes" />
+        <copy todir="${out.dir}/classes">
+            <fileset dir="${basedir}/../org.apache.felix.framework/src/main/resources">
+                <include name="**/*" />
+            </fileset>
+            <fileset dir="${basedir}/../org.apache.felix.framework/src/main/appended-resources">
+                <include name="**/*" />
+            </fileset>
+        </copy>
     </target>
 
     <target name="org.apache.felix.resolver" depends="org.osgi">
         <javac
             srcdir="${basedir}/../org.apache.felix.resolver/src/main/java"
             destdir="${out.dir}/classes"
-            classpath="${out.dir}/classes"
-            verbose="true" />
+            classpath="${out.dir}/classes" />
+        <copy todir="${out.dir}/classes">
+            <fileset dir="${basedir}/../org.apache.felix.resolver/src/main/resources">
+                <include name="**/*" />
+            </fileset>
+            <fileset dir="${basedir}/../org.apache.felix.resolver/src/main/appended-resources">
+                <include name="**/*" />
+            </fileset>
+        </copy>
     </target>
 
     <target name="org.osgi" depends="org.osgi.annotation, org.osgi.core" />
@@ -46,16 +67,14 @@
         <javac
             srcdir="${basedir}/../org.osgi/annotation/src"
             destdir="${out.dir}/classes"
-            classpath="${out.dir}/classes"
-            verbose="true" />
+            classpath="${out.dir}/classes" />
     </target>
 
     <target name="org.osgi.core" depends="-pre-compile">
         <javac
             srcdir="${basedir}/../org.osgi/core/src"
             destdir="${out.dir}/classes"
-            classpath="${out.dir}/classes"
-            verbose="true" />
+            classpath="${out.dir}/classes" />
     </target>
 
     <target name="-pre-compile">
