@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="org.apache.felix" default="package">
+
+    <property name="src.dir" value="${basedir}/src" />
+    <property name="out.dir" value="${basedir}/bin" />
+
+    <target name="clean">
+        <delete dir="${out.dir}" />
+    </target>
+
+    <target name="package" depends="compile">
+        <jar
+            destfile="${out.dir}/${ant.project.name}.jar"
+            basedir="${out.dir}/classes" />
+    </target>
+
+    <target name="compile" depends="org.apache.felix.main" />
+
+    <target name="org.apache.felix.main" depends="org.apache.felix.framework">
+        <javac
+            srcdir="${basedir}/../org.apache.felix.main/src/main/java"
+            destdir="${out.dir}/classes"
+            classpath="${out.dir}/classes"
+            verbose="true" />
+    </target>
+
+    <target name="org.apache.felix.framework" depends="org.apache.felix.resolver">
+        <javac
+            srcdir="${basedir}/../org.apache.felix.framework/src/main/java"
+            destdir="${out.dir}/classes"
+            classpath="${out.dir}/classes"
+            verbose="true" />
+    </target>
+
+    <target name="org.apache.felix.resolver" depends="org.osgi">
+        <javac
+            srcdir="${basedir}/../org.apache.felix.resolver/src/main/java"
+            destdir="${out.dir}/classes"
+            classpath="${out.dir}/classes"
+            verbose="true" />
+    </target>
+
+    <target name="org.osgi" depends="org.osgi.annotation, org.osgi.core" />
+
+    <target name="org.osgi.annotation" depends="-pre-compile">
+        <javac
+            srcdir="${basedir}/../org.osgi/annotation/src"
+            destdir="${out.dir}/classes"
+            classpath="${out.dir}/classes"
+            verbose="true" />
+    </target>
+
+    <target name="org.osgi.core" depends="-pre-compile">
+        <javac
+            srcdir="${basedir}/../org.osgi/core/src"
+            destdir="${out.dir}/classes"
+            classpath="${out.dir}/classes"
+            verbose="true" />
+    </target>
+
+    <target name="-pre-compile">
+        <mkdir dir="${out.dir}" />
+        <mkdir dir="${out.dir}/classes" />
+    </target>
+
+</project>
+
